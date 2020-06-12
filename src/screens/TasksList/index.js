@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {View, Text, FlatList, BackHandler} from 'react-native';
+import {View, Text, FlatList, BackHandler, Image} from 'react-native';
 import {FirebaseContext} from '../../providers/FirebaseProvider';
 import texts from '../../utils/texts';
 import colors from '../../utils/colors';
@@ -30,8 +30,8 @@ const TasksList = props => {
   const TaskItem = task => {
     return (
       <Touchable style={styles.taskContainer}>
-        {task.image ? (
-          <View />
+        {task.imagesUrls?.length > 0 ? (
+          <Image style={styles.taskImage} source={{uri: task.imagesUrls[0]}} />
         ) : (
           <View style={styles.imageReplacement}>
             <Text style={styles.imageReplacementTxt}>

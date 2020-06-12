@@ -121,6 +121,31 @@ const styles = StyleSheet.create({
   backBtn: {
     alignSelf: 'flex-start',
   },
+  previewImage: {
+    width: width - 32,
+    height: (width - 32) / 2,
+    borderRadius: 12,
+  },
+  previewImagesScroll: {
+    width: width - 32,
+    height: (width - 32) / 2,
+    marginVertical: 16,
+  },
+  addImgBtn: {
+    width: width * 0.6,
+    height: 50,
+    backgroundColor: colors.green,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginBottom: 16,
+  },
+  addImgBtnTxt: {
+    fontFamily: 'Poppins-Bold',
+    fontSize: 16,
+    color: colors.white,
+  },
 });
 
 export default styles;

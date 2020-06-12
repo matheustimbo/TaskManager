@@ -5,6 +5,7 @@ import {
   TextInput,
   ScrollView,
   KeyboardAvoidingView,
+  Image,
   Platform,
 } from 'react-native';
 import Touchable from '../../components/Touchable';
@@ -21,6 +22,8 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Button from '../../components/Button';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
+import storage from '@react-native-firebase/storage';
+import ImagePicker from 'react-native-image-picker';
 
 const CreateTask = props => {
   const context = useContext(FirebaseContext);
@@ -32,8 +35,8 @@ const CreateTask = props => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
-  const [isTimePickerVisible, setIsTimePickerVisible] = useState(false);
   const [addCategoryVisible, setAddCategoryVisible] = useState(false);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     moment.locale('pt-br');
@@ -41,25 +44,39 @@ const CreateTask = props => {
 
   const setNewDate = newDate => {
     setIsDatePickerVisible(false);
-    setIsTimePickerVisible(false);
     setDate(newDate);
   };
 
-  const createTask = () => {
+  const createTask = async () => {
     setError('');
     if (name == '') {
       return setError(texts.noNameError);
     }
 
     setLoading(true);
-    database()
+    const taskRef = database()
       .ref(`tasks/${auth().currentUser.uid}`)
-      .push({
+      .push();
+    var imagesUrls = [];
+    for (var i = 0; i < images.length; i++) {
+      const storageRef = storage().ref(
+        `tasks/${auth().currentUser.uid}/${taskRef.key}/image-${i}.${
+          images[i].type.split('/')[1]
+        }`,
+      );
+      await storageRef.putFile(
+        Platform.OS === 'ios' ? images[i].uri : images[i].path,
+      );
+      imagesUrls.push(await storageRef.getDownloadURL());
+    }
+    taskRef
+      .set({
         name,
         date: date.valueOf(),
         description,
         category,
         done: false,
+        imagesUrls,
       })
       .then(() => {
         setLoading(false);
@@ -68,6 +85,20 @@ const CreateTask = props => {
       .catch(e => {
         console.log(e);
       });
+  };
+
+  const addImage = () => {
+    ImagePicker.showImagePicker({}, response => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        setImages([...images, response]);
+      }
+    });
   };
 
   return (
@@ -114,6 +145,22 @@ const CreateTask = props => {
       <KeyboardAvoidingView
         style={[styles.screen, styles.content]}
         contentContainerStyle={styles.content}>
+        {images.length > 0 && (
+          <ScrollView
+            horizontal
+            pagingEnabled
+            style={styles.previewImagesScroll}>
+            {images.map(image => {
+              console.log('image', image);
+              return (
+                <Image style={styles.previewImage} source={{uri: image.uri}} />
+              );
+            })}
+          </ScrollView>
+        )}
+        <Touchable onPress={() => addImage()} style={styles.addImgBtn}>
+          <Text style={styles.addImgBtnTxt}>{texts.addImage}</Text>
+        </Touchable>
         <Text style={styles.label}>{texts.description}</Text>
         <View>
           <TextInput
@@ -154,7 +201,6 @@ const CreateTask = props => {
         onConfirm={newDate => setNewDate(newDate)}
         onCancel={() => {
           setIsDatePickerVisible(false);
-          setIsTimePickerVisible(false);
         }}
         minimumDate={Date.now()}
       />

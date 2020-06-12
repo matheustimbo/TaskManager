@@ -66,6 +66,11 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     justifyContent: 'space-between',
   },
+  taskImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+  },
   imageReplacement: {
     backgroundColor: colors.blue,
     width: 40,
@@ -88,7 +93,6 @@ const styles = StyleSheet.create({
   taskName: {
     fontSize: 16,
     fontFamily: 'Poppins-Bold',
-
     maxWidth: width - 32 - 40 - 32 - 8 - 48,
   },
   taskDate: {

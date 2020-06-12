@@ -38,6 +38,7 @@ const texts = {
   addCategoryBtn: '+',
   addCategory: 'Adicionar Categoria',
   newCategory: 'Nova categoria',
+  addImage: 'Adicionar imagem',
 };
 
 export default texts;
