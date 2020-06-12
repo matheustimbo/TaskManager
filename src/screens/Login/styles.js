@@ -6,6 +6,10 @@ const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    justifyContent: 'space-between',
+  },
+  screenContent: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -52,8 +56,8 @@ const styles = StyleSheet.create({
     top: 0,
   },
   signUpButton: {
-    position: 'absolute',
-    bottom: getBottomSpace() + height * 0.05,
+    marginBottom: getBottomSpace() + 32,
+    alignSelf: 'center',
   },
   signUpText: {
     textAlign: 'center',

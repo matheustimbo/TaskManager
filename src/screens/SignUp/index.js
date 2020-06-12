@@ -77,47 +77,50 @@ const SignUp = props => {
 
   return (
     <View style={styles.screen}>
-      <Text style={styles.title}>{texts.signUpTitle}</Text>
-      <TextInput
-        value={name}
-        placeholder="Seu nome"
-        onChangeText={pName => setName(pName)}
-        style={styles.textInput}
-      />
-      <TextInput
-        value={email}
-        placeholder="Seu email"
-        onChangeText={pEmail => setEmail(pEmail)}
-        style={styles.textInput}
-      />
-
-      <View style={styles.inputContainer}>
+      <View style={styles.screenContent}>
+        <Text style={styles.title}>{texts.signUpTitle}</Text>
         <TextInput
-          value={password}
-          placeholder="Sua senha"
-          onChangeText={pPassword => setPassword(pPassword)}
-          secureTextEntry={!passVisible}
-          style={[styles.textInput, {marginTop: 0}]}
+          value={name}
+          placeholder="Seu nome"
+          onChangeText={pName => setName(pName)}
+          style={styles.textInput}
         />
-        <View style={styles.iconPositioner}>
-          <Touchable onPress={() => setPassVisible(!passVisible)}>
-            <Icon
-              name={passVisible ? 'visibility' : 'visibility-off'}
-              size={32}
-              color={colors.black}
-            />
-          </Touchable>
+        <TextInput
+          value={email}
+          placeholder="Seu email"
+          onChangeText={pEmail => setEmail(pEmail)}
+          style={styles.textInput}
+        />
+
+        <View style={styles.inputContainer}>
+          <TextInput
+            value={password}
+            placeholder="Sua senha"
+            onChangeText={pPassword => setPassword(pPassword)}
+            secureTextEntry={!passVisible}
+            style={[styles.textInput, {marginTop: 0}]}
+          />
+          <View style={styles.iconPositioner}>
+            <Touchable onPress={() => setPassVisible(!passVisible)}>
+              <Icon
+                name={passVisible ? 'visibility' : 'visibility-off'}
+                size={32}
+                color={colors.black}
+              />
+            </Touchable>
+          </View>
         </View>
+
+        <Text style={styles.error}>{error}</Text>
+        <Button
+          loading={loading}
+          style={styles.button}
+          text={texts.signUp}
+          textStyle={styles.buttonText}
+          onPress={() => handleSignUpPress()}
+        />
       </View>
 
-      <Text style={styles.error}>{error}</Text>
-      <Button
-        loading={loading}
-        style={styles.button}
-        text={texts.signUp}
-        textStyle={styles.buttonText}
-        onPress={() => handleSignUpPress()}
-      />
       <Touchable
         onPress={() => props.navigation.navigate('Login')}
         style={styles.loginButton}>
