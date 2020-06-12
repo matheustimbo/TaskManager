@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>992386765252-i9qnb43409q7oj5c0ic3jm0lj9bu6krg.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.992386765252-i9qnb43409q7oj5c0ic3jm0lj9bu6krg</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCXrLc2e16rLeUTd3bzCHFD6spOewV6hWA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>992386765252</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.todochallenge</string>
+	<key>PROJECT_ID</key>
+	<string>todochallenge-2a888</string>
+	<key>STORAGE_BUCKET</key>
+	<string>todochallenge-2a888.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:992386765252:ios:3c7485f0563e579f26d491</string>
+	<key>DATABASE_URL</key>
+	<string>https://todochallenge-2a888.firebaseio.com</string>
+</dict>
+</plist>

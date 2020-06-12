@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "992386765252",
+    "firebase_url": "https://todochallenge-2a888.firebaseio.com",
+    "project_id": "todochallenge-2a888",
+    "storage_bucket": "todochallenge-2a888.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992386765252:android:4492fd562957d71b26d491",
+        "android_client_info": {
+          "package_name": "com.todochallenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "992386765252-o8jfrjt9ut5ed80t3d77ikcff62sp0g3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQOYIp8G78uBvp3ijJF5Pos7RzT--eCLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "992386765252-o8jfrjt9ut5ed80t3d77ikcff62sp0g3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "992386765252-i9qnb43409q7oj5c0ic3jm0lj9bu6krg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.todochallenge"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
