@@ -15,7 +15,7 @@ const AddCategoryModal = props => {
   const [loading, setLoading] = useState(false);
 
   const createNewCategory = () => {
-    if (newCategory == '') {
+    if (newCategory.trim() == '') {
       props.onClose();
     }
     setLoading(true);
@@ -24,7 +24,7 @@ const AddCategoryModal = props => {
     );
     categoriesRef.once('value').then(snapshot => {
       let currentCategories = snapshot.val();
-      currentCategories.push(newCategory.toUpperCase());
+      currentCategories.push(newCategory.trim().toUpperCase());
       categoriesRef.set(currentCategories).then(() => {
         setLoading(false);
         props.onClose();
@@ -34,7 +34,7 @@ const AddCategoryModal = props => {
   };
 
   return (
-    <Modal visible={props.visible} animationType="slide" transparent>
+    <Modal visible={props.visible} animationType="fade" transparent>
       <View
         style={{
           width,
