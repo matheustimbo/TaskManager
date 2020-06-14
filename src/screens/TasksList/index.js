@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {View, Text, FlatList, BackHandler, Image} from 'react-native';
+import {View, Text, FlatList, BackHandler, Image, Alert} from 'react-native';
 import {FirebaseContext} from '../../providers/FirebaseProvider';
 import texts from '../../utils/texts';
 import colors from '../../utils/colors';
@@ -27,9 +27,32 @@ const TasksList = props => {
     }, []),
   );
 
+  const confirmDeleteTask = taskKey => {
+    Alert.alert(
+      'Deletar tarefa',
+      'Tem certeza que deseja deletar a tarefa?',
+      [
+        {
+          text: 'Cancelar',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Deletar',
+          onPress: () => context.deleteTask(taskKey),
+          style: 'destructive',
+        },
+        ,
+      ],
+      {cancelable: false},
+    );
+  };
+
   const TaskItem = task => {
     return (
-      <Touchable style={styles.taskContainer}>
+      <Touchable
+        style={styles.taskContainer}
+        onPress={() => props.navigation.navigate('TaskDetails', {task})}>
         {task.imagesUrls?.length > 0 ? (
           <Image style={styles.taskImage} source={{uri: task.imagesUrls[0]}} />
         ) : (
@@ -58,6 +81,9 @@ const TasksList = props => {
           value={task.done}
           onValueChange={() => context.toggleTaskDone(task.key)}
         />
+        <Touchable onPress={() => confirmDeleteTask(task.key)}>
+          <Icon name="delete" size={32} color={colors.darkBlue} />
+        </Touchable>
       </Touchable>
     );
   };

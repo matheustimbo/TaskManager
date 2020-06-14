@@ -48,43 +48,45 @@ const CreateTask = props => {
   };
 
   const createTask = async () => {
-    setError('');
-    if (name == '') {
-      return setError(texts.noNameError);
-    }
+    if (!loading) {
+      setError('');
+      if (name == '') {
+        return setError(texts.noNameError);
+      }
 
-    setLoading(true);
-    const taskRef = database()
-      .ref(`tasks/${auth().currentUser.uid}`)
-      .push();
-    var imagesUrls = [];
-    for (var i = 0; i < images.length; i++) {
-      const storageRef = storage().ref(
-        `tasks/${auth().currentUser.uid}/${taskRef.key}/image-${i}.${
-          images[i].type.split('/')[1]
-        }`,
-      );
-      await storageRef.putFile(
-        Platform.OS === 'ios' ? images[i].uri : images[i].path,
-      );
-      imagesUrls.push(await storageRef.getDownloadURL());
+      setLoading(true);
+      const taskRef = database()
+        .ref(`tasks/${auth().currentUser.uid}`)
+        .push();
+      var imagesUrls = [];
+      for (var i = 0; i < images.length; i++) {
+        const storageRef = storage().ref(
+          `tasks/${auth().currentUser.uid}/${taskRef.key}/image-${i}.${
+            images[i].type.split('/')[1]
+          }`,
+        );
+        await storageRef.putFile(
+          Platform.OS === 'ios' ? images[i].uri : images[i].path,
+        );
+        imagesUrls.push(await storageRef.getDownloadURL());
+      }
+      taskRef
+        .set({
+          name,
+          date: date.valueOf(),
+          description,
+          category,
+          done: false,
+          imagesUrls,
+        })
+        .then(() => {
+          setLoading(false);
+          props.navigation.goBack();
+        })
+        .catch(e => {
+          console.log(e);
+        });
     }
-    taskRef
-      .set({
-        name,
-        date: date.valueOf(),
-        description,
-        category,
-        done: false,
-        imagesUrls,
-      })
-      .then(() => {
-        setLoading(false);
-        props.navigation.goBack();
-      })
-      .catch(e => {
-        console.log(e);
-      });
   };
 
   const addImage = () => {

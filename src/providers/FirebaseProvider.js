@@ -44,6 +44,12 @@ const FirebaseProvider = props => {
     });
   };
 
+  const deleteTask = taskKey => {
+    database()
+      .ref(`tasks/${auth().currentUser.uid}/${taskKey}`)
+      .remove();
+  };
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -53,6 +59,7 @@ const FirebaseProvider = props => {
         listenToTasks,
         tasks,
         toggleTaskDone,
+        deleteTask,
       }}>
       {props.children}
     </FirebaseContext.Provider>

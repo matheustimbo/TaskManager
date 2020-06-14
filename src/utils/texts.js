@@ -39,6 +39,7 @@ const texts = {
   addCategory: 'Adicionar Categoria',
   newCategory: 'Nova categoria',
   addImage: 'Adicionar imagem',
+  confirm: 'Confirmar',
 };
 
 export default texts;
